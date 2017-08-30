@@ -1,0 +1,32 @@
+<!--
+  Generated template for the QuickTextPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Texto rápido</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list >
+          <ion-item>
+            <ion-label floating>Ingresa el texto que deseas mostrar</ion-label>
+            <ion-textarea [(ngModel)]="text" name="text"></ion-textarea>
+          </ion-item>
+        </ion-list>
+        <button ion-button block (click)="showText()">Mostrar texto</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

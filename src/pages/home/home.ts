@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  goToQuickText() {
+    this.navCtrl.push('QuickTextPage');
+  }
+
 }
