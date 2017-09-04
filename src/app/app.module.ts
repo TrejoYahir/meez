@@ -1,3 +1,4 @@
+import { PhraseListPage } from './../pages/phrase-list/phrase-list';
 import { TextToSpeech } from '@ionic-native/text-to-speech'
 import { TextViewPage } from './../pages/text-view/text-view';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,7 +14,8 @@ import { HomePage } from '../pages/home/home';
   declarations: [
     MyApp,
     HomePage,
-    TextViewPage
+    TextViewPage,
+    PhraseListPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { HomePage } from '../pages/home/home';
   entryComponents: [
     MyApp,
     HomePage,
-    TextViewPage
+    TextViewPage,
+    PhraseListPage
   ],
   providers: [
     StatusBar,

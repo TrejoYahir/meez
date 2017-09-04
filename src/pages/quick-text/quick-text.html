@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Texto rápido</ion-title>
+    <ion-title>Escritura rápida</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,13 +18,16 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <ion-list >
-          <ion-item>
-            <ion-label floating>Ingresa el texto que deseas mostrar</ion-label>
-            <ion-textarea [(ngModel)]="text" name="text"></ion-textarea>
-          </ion-item>
-        </ion-list>
-        <button ion-button block (click)="showText()">Mostrar texto</button>
+        <form #f="ngForm" (ngSubmit)="showText(f)">
+          <ion-list >
+            <ion-item>
+              <ion-label floating>Escribe tu mensaje aquí</ion-label>
+              <ion-textarea [(ngModel)]="text" name="text" maxlength="140" required></ion-textarea>
+            </ion-item>
+          </ion-list>
+          <p ion-text color="faded" text-right>{{text.length}}/140</p>
+          <button ion-button block type="submit" [disabled]="!f.valid">Mostrar</button>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

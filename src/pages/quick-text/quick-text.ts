@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class QuickTextPage {
 
-  private text: String;
+  private text: String = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -25,10 +25,12 @@ export class QuickTextPage {
     console.log('ionViewDidLoad QuickTextPage');
   }
 
-  showText() {
-    this.navCtrl.push(TextViewPage, {
-      'text': this.text
-    });
+  showText(form) {
+    if(form.valid) {
+      this.navCtrl.push(TextViewPage, {
+        'text': this.text
+      });
+    }   
   }
 
 }

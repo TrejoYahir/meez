@@ -17,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TextViewPage {
 
   private speech: any;
+  private playing: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private tts: TextToSpeech) {
     this.speech = {
@@ -25,10 +26,42 @@ export class TextViewPage {
     };
   }
 
-  speak() {
+  ionViewWillUnload(){
+    if(this.playing) {
+      this.stopPhrase();
+    }
+  }
+
+  playPhrase() {
+    this.playing = true;
     this.tts.speak(this.speech)
-      .then(()=>console.log('he hablado'))
-      .catch((reason)=>console.log('oh no, he fallados', reason));
+      .then(() => {
+        this.playing = false;
+        console.log('he hablado')
+      })
+      .catch((reason )=> {
+        this.playing = false;        
+        console.log('oh no, he fallados', reason)
+      });
+  }
+
+  stopPhrase() {
+    this.tts.speak('')
+    .then(() => {
+      this.playing = false;        
+    })
+    .catch((reason)=>{
+      console.log('oh no, he fallados', reason)          
+    });
+  }
+
+  speak() {
+    if(!this.playing) {
+      this.playPhrase();
+    }
+    else {
+      this.stopPhrase();
+    }
   }
 
 }

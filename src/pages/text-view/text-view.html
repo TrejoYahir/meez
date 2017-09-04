@@ -13,16 +13,16 @@
 
 
 <ion-content padding>
-  <ion-grid>
+  <ion-grid padding-bottom>
     <ion-row>
-      <ion-col col-12>
-        <h1>{{ speech.text }}</h1>
-      </ion-col>
-      <ion-col col-12>
-        <button ion-fab color="danger" (click)="speak()">
-          <ion-icon name="play"></ion-icon>
-        </button>
+      <ion-col col-12 text-center>
+        <h1 class="phrase-text">{{ speech.text }}</h1>
       </ion-col>
     </ion-row>
   </ion-grid>
+ <ion-fab center bottom>
+  <button ion-fab color="danger" (click)="speak()">
+    <ion-icon [name]="playing ? 'square' : 'play'"></ion-icon>
+  </button>
+ </ion-fab>
 </ion-content>

@@ -7,6 +7,16 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <button *ngFor="let service of services" (click)="showPhrases(service)" ion-button block icon-left margin-vertical>
+          <ion-icon [name]="service.icon" item-start></ion-icon>
+          {{service.name}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-fab bottom right>
     <button ion-fab (click)="goToQuickText()"><ion-icon name="create"></ion-icon></button>
   </ion-fab>
