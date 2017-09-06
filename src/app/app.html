@@ -1,1 +1,23 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openPage(loginPage)" padding-vertical>
+          <h1>Usuario no registrado</h1>
+          <p>Iniciar sesión</p>
+      </button>
+      <button ion-item (click)="openPage(registerPage)">
+          <p>Registrate</p>
+      </button>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-list >
+      <button ion-item (click)="openPage(complainsPage)">
+        <p>Sugerencias y quejas</p>
+      </button>
+    </ion-list>
+  </ion-footer>
+</ion-menu>
+  
+
+<ion-nav #content [root]="rootPage" id="nav"></ion-nav>

@@ -7,7 +7,7 @@ export default [
             {
                 id: 1,
                 name: 'Preguntar costo',
-                content: '¿Cuánto cuesta?'
+                content: '¿Cuánto cuesta el viaje?'
             },
             {
                 id: 2,
