@@ -44,7 +44,7 @@
               <ion-input type="email"  formControlName="correo"></ion-input>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines>
-              <p>Correo un electrónico válido</p>
+              <p>Por favor ingresa un electrónico válido</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Contraseña</ion-label>
@@ -69,8 +69,9 @@
               <p>Las contraseñas no coinciden</p>
             </ion-item>
           </ion-list>
-          <button ion-button block type="submit" margin-top>Registrarse</button>        
+          <button ion-button block type="submit" margin-top>Registrarse</button>  
         </form>
+        <button ion-button block clear margin-top (click)="goToLogin()">Ya tengo cuenta</button>        
       </ion-col>
     </ion-row>
   </ion-grid>

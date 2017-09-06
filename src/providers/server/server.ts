@@ -12,7 +12,8 @@ export class ServerProvider {
   private url: string = '';
 
   constructor() {
-    this.url = "http://vast-headland-44785.herokuapp.com";
+    //this.url = "http://vast-headland-44785.herokuapp.com";
+    this.url = "http://localhost:5000";    
   }
 
   getUrl() {

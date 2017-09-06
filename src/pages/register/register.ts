@@ -1,6 +1,8 @@
+import { LoginPage } from './../login/login';
 import { UserProvider } from './../../providers/user/user';
 import { PasswordValidation } from './../../validators/password';
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
@@ -22,7 +24,7 @@ export class RegisterPage {
   private userForm: FormGroup;
   private submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private storage: Storage) {
     this.createForm();
     console.log(this.userForm);
     
@@ -69,7 +71,6 @@ export class RegisterPage {
       delete data.confirm;
       this.userProvider.registerUser(data).subscribe((response) => {
         loader.dismiss();
-        console.log("success", response);
         this.showToast(response.Mensaje);
         if(response.Success)
           this.registerSuccess(response);
@@ -84,22 +85,24 @@ export class RegisterPage {
   }
 
   registerSuccess(response) {    
-    let data = {
+    let user = {
       correo: this.userForm.value.correo,
-      contra: this.userForm.value.contra     
+      nombre: this.userForm.value.nombre,
+      apellidos: this.userForm.value.apellidos
     }
-    const loader = this.loadingCtrl.create({
-      content: "Iniciando sesión"
-    });
-    loader.present();
-    this.userProvider.login(data).subscribe((response)=>{
-      console.log("login", response);      
-      loader.dismiss();
-      this.showToast(response.Mensaje);
-    }, (error)=>{
-      loader.dismiss();      
-      this.showToast("Ocurrió un error en el servidor");              
-    });
+
+    this.storage.set('loggedIn', true);
+    this.userProvider.setLoggedIn(true);
+
+    this.userProvider.setUser(user);
+    this.storage.set('user', user)
+      .then((data)=>{
+        this.userForm.reset();
+        this.navCtrl.popToRoot();
+      })
+      .catch((error)=>{
+        console.log(error);      
+      });
   }
 
   registerError(response) {
@@ -112,6 +115,10 @@ export class RegisterPage {
       duration: 3000
     });
     toast.present();
+  }
+
+  goToLogin() {
+    this.navCtrl.push(LoginPage)
   }
 
 }

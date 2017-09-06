@@ -1,12 +1,28 @@
 <ion-menu [content]="content">
   <ion-content>
     <ion-list>
-      <button ion-item (click)="openPage(loginPage)" padding-vertical>
+      <button ion-item (click)="openPage(loginPage)" padding-vertical *ngIf="!loggedIn">
           <h1>Usuario no registrado</h1>
           <p>Iniciar sesión</p>
       </button>
-      <button ion-item (click)="openPage(registerPage)">
+      <button ion-item (click)="openPage(registerPage)" *ngIf="!loggedIn">
           <p>Registrate</p>
+      </button>
+      <button ion-item (click)="logout()" padding-vertical *ngIf="loggedIn">
+        <h1 text-capitalize>{{user?.nombre}}</h1>
+        <p>Cerrar sesión</p>
+      </button>
+      <button ion-item (click)="addPhrase()" *ngIf="loggedIn">
+        <p>Añade una frase</p>
+      </button>
+      <button ion-item (click)="managePhrases()" *ngIf="loggedIn">
+        <p>Administra tus frases</p>
+      </button>
+      <button ion-item (click)="addPhrase()" *ngIf="loggedIn">
+        <p>Añade un servicio</p>
+      </button>
+      <button ion-item (click)="addPhrase()" *ngIf="loggedIn">
+        <p>Elimina un servicio</p>
       </button>
     </ion-list>
   </ion-content>

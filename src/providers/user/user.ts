@@ -1,6 +1,7 @@
 import { ServerProvider } from './../server/server';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 
 /*
@@ -13,6 +14,8 @@ import 'rxjs/add/operator/map';
 export class UserProvider {
 
   private url;
+  private user = new BehaviorSubject<any>(null);
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(public http: Http, private serverProvider: ServerProvider) {
     this.url = this.serverProvider.getUrl();
@@ -24,6 +27,22 @@ export class UserProvider {
 
   login(data) {
     return this.http.post(this.url + "/login", data).map(response => response.json());    
+  }
+
+  isLoggedIn() {
+    return this.loggedIn;
+  }
+
+  setLoggedIn(state) {
+    this.loggedIn.next(state);
+  }
+
+  setUser(user) {
+    this.user.next(user);
+  }
+
+  getUser() {
+    return this.user;
   }
 
 }
