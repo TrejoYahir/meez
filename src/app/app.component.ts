@@ -64,25 +64,23 @@ export class MyApp {
       message: '¿Seguro que deseas cerrar sesión?',
       buttons: [
         {
-          text: 'Cerrar sesión',
-          handler: this.logout
-        },
-        {
           text: 'Cancelar',
           role: 'cancel'
+        },
+        {
+          text: 'Cerrar sesión',
+          handler: () => {
+            this.storage.clear();
+            this.userProvider.setLoggedIn(false);
+            this.userProvider.setUser(null);
+            this.menuCtrl.close();    
+            this.nav.popToRoot();
+            this.showToast('Se ha cerrado la sesión');
+          }
         }
       ]
     });
     prompt.present();
-  }
-
-  logout() {
-    this.storage.clear();
-    this.userProvider.setLoggedIn(false);
-    this.userProvider.setUser(null);
-    this.menuCtrl.close();    
-    this.nav.popToRoot();
-    this.showToast('Se ha cerrado la sesión');
   }
 
   showToast(message) {

@@ -1,18 +1,44 @@
 <!--
-  Generated template for the LoginPage page.
+  Generated template for the RegisterPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>Iniciar sesión</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <form [formGroup]="userForm" (ngSubmit)="login()">
+            <ion-list padding no-margin>
+              <ion-item no-padding>
+                <ion-label floating text-uppercase>Correo electrónico</ion-label>
+                <ion-input type="email"  formControlName="correo"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines>
+                <p>Por favor ingresa un electrónico válido</p>
+              </ion-item>
+              <ion-item no-padding>
+                <ion-label floating text-uppercase>Contraseña</ion-label>
+                <ion-input type="password" formControlName="contra"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines>
+                <p>Por favor ingresa una contraseña</p>
+              </ion-item>
+            </ion-list>
+            <button ion-button block type="submit" margin-top>Iniciar sesión</button>  
+          </form>
+          <button ion-button block margin-top (click)="goToRegister()">Registrarme</button>    
+          <button ion-button block margin-top clear small (click)="goToHome()">Lo haré después</button>                  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

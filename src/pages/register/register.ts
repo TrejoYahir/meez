@@ -26,8 +26,7 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private storage: Storage) {
     this.createForm();
-    console.log(this.userForm);
-    
+    console.log(this.userForm);    
   }
 
   private createForm() {
