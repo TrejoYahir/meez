@@ -61,13 +61,14 @@ export class LoginPage {
   }
 
   loginSuccess(response) {    
-    this.showToast("Sesión iniciada correctamente");
 
     let user = {
       nombre: response.Nombre,
       apellidos: response.Apellidos,
       correo: this.userForm.value.correo
-    }   
+    }
+    
+    this.showToast("Bienvenido, " + user.nombre);    
     
     this.storage.set('loggedIn', true);
     this.userProvider.setLoggedIn(true);

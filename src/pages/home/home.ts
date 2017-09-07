@@ -1,8 +1,8 @@
+import { ServicesProvider } from './../../providers/services/services';
 import { PhraseListPage } from './../phrase-list/phrase-list';
 import { Service } from './../../data/service.interface';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import services from '../../data/services';
 
 @Component({
   selector: 'page-home',
@@ -12,9 +12,12 @@ export class HomePage {
 
   services: Service[];
 
-  constructor(public navCtrl: NavController) {
-    this.services = services;
-    console.log(this.services);    
+  constructor(public navCtrl: NavController, private servicesProvider: ServicesProvider) {    
+    servicesProvider.getServices()
+    .asObservable()
+    .subscribe(serviceList => {
+      this.services = serviceList;     
+    });
   }
 
   goToQuickText() {

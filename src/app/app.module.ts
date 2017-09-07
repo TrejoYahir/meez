@@ -1,3 +1,6 @@
+import { ManageServicesPage } from './../pages/manage-services/manage-services';
+import { AddServicePage } from './../pages/add-service/add-service';
+import { AddPhrasePage } from './../pages/add-phrase/add-phrase';
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from './../pages/register/register';
 import { PhraseListPage } from './../pages/phrase-list/phrase-list';
@@ -15,6 +18,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UserProvider } from '../providers/user/user';
 import { ServerProvider } from '../providers/server/server';
+import { ServicesProvider } from '../providers/services/services';
+import { PhrasesProvider } from '../providers/phrases/phrases';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,10 @@ import { ServerProvider } from '../providers/server/server';
     TextViewPage,
     PhraseListPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    AddPhrasePage,
+    AddServicePage,
+    ManageServicesPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,10 @@ import { ServerProvider } from '../providers/server/server';
     TextViewPage,
     PhraseListPage, 
     RegisterPage,
-    LoginPage
+    LoginPage,
+    AddPhrasePage,
+    AddServicePage,
+    ManageServicesPage
   ],
   providers: [
     StatusBar,
@@ -46,7 +57,9 @@ import { ServerProvider } from '../providers/server/server';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TextToSpeech,
     UserProvider,
-    ServerProvider
+    ServerProvider,
+    ServicesProvider,
+    PhrasesProvider
   ]
 })
 export class AppModule {}

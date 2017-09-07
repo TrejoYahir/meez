@@ -13,16 +13,16 @@
         <p>Cerrar sesión</p>
       </button>
       <button ion-item (click)="openPage(addPhrase)" *ngIf="loggedIn">
-        <p>Añade una frase</p>
+        <p>Añadir frase</p>
       </button>
       <button ion-item (click)="openPage(managePhrases)" *ngIf="loggedIn">
-        <p>Administra tus frases</p>
+        <p>Administrar frases</p>
       </button>
       <button ion-item (click)="openPage(addService)" *ngIf="loggedIn">
-        <p>Añade un servicio</p>
+        <p>Añader servicio</p>
       </button>
-      <button ion-item (click)="openPage(deleteService)" *ngIf="loggedIn">
-        <p>Elimina un servicio</p>
+      <button ion-item (click)="openPage(manageServices)" *ngIf="loggedIn">
+        <p>Eliminar servicio</p>
       </button>
     </ion-list>
   </ion-content>

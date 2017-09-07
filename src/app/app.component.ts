@@ -1,3 +1,7 @@
+import { ManageServicesPage } from './../pages/manage-services/manage-services';
+import { ServicesProvider } from './../providers/services/services';
+import { AddPhrasePage } from './../pages/add-phrase/add-phrase';
+import { AddServicePage } from './../pages/add-service/add-service';
 import { UserProvider } from './../providers/user/user';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from './../pages/login/login';
@@ -6,6 +10,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, MenuController, ToastController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import services from '../data/services';
 
 import { HomePage } from '../pages/home/home';
 @Component({
@@ -18,14 +23,19 @@ export class MyApp {
 
   registerPage:any = RegisterPage;
   loginPage:any = LoginPage;
+  addService:any = AddServicePage;
+  addPhrase: any = AddPhrasePage;
+  manageServices:any = ManageServicesPage
+
   loggedIn:boolean = false;
   user: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private storage: Storage, private userProvider: UserProvider, private toastCtrl: ToastController, private alertCtrl: AlertController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private storage: Storage, private userProvider: UserProvider, private toastCtrl: ToastController, private alertCtrl: AlertController, private servicesProvider: ServicesProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       
+      //check if user is logged in
       userProvider.isLoggedIn()
         .asObservable()
         .subscribe(state => {
@@ -47,6 +57,18 @@ export class MyApp {
           })
         }
       });
+
+      //check if user has custom services
+      this.storage.get('services').then((serviceList)=>{
+        if(serviceList != null && serviceList.length > 0) {
+          this.storage.get('services').then((serviceList)=>{
+            this.servicesProvider.setServices(serviceList);
+          });
+        }
+        else {
+          this.servicesProvider.setServices(services);
+        }
+      })
 
       statusBar.styleDefault();
       splashScreen.hide();
@@ -75,6 +97,7 @@ export class MyApp {
             this.userProvider.setUser(null);
             this.menuCtrl.close();    
             this.nav.popToRoot();
+            this.servicesProvider.setServices(services);
             this.showToast('Se ha cerrado la sesión');
           }
         }

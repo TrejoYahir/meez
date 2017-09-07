@@ -23,37 +23,37 @@
               <ion-label floating text-uppercase>Nombre</ion-label>
               <ion-input type="text"  formControlName="nombre"></ion-input>
             </ion-item>
-            <ion-item *ngIf="(userForm.controls.nombre.errors?.required || userForm.controls.nombre.errors?.whitespace) && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="(userForm.controls.nombre.errors?.required || userForm.controls.nombre.errors?.whitespace) && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa tu nombre</p>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.nombre.errors?.pattern && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.nombre.errors?.pattern && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines text-wrap>
               <p>Nombre contiene caracteres inválidos</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Apellidos</ion-label>
               <ion-input type="text"  formControlName="apellidos"></ion-input>
             </ion-item>
-            <ion-item *ngIf="(userForm.controls.apellidos.errors?.required || userForm.controls.apellidos.errors?.whitespace) && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="(userForm.controls.apellidos.errors?.required || userForm.controls.apellidos.errors?.whitespace) && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa tus apellidos</p>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.apellidos.errors?.pattern && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.apellidos.errors?.pattern && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines text-wrap>
               <p>Apellidos contienen caracteres inválidos</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Correo electrónico</ion-label>
               <ion-input type="email"  formControlName="correo"></ion-input>
             </ion-item>
-            <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa un electrónico válido</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Contraseña</ion-label>
               <ion-input type="password" formControlName="contra"></ion-input>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa una contraseña</p>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.contra.errors?.minlength && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.contra.errors?.minlength && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines text-wrap>
               <p style="word-break: normal; white-space: normal;">
                 Contraseña debe contener por lo menos {{userForm.controls.contra.errors.minlength.requiredLength}} caracteres.
               </p>
@@ -62,10 +62,10 @@
               <ion-label floating text-uppercase>Confirmar contraseña</ion-label>
               <ion-input type="password" formControlName="confirm"></ion-input>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.confirm.errors?.required && (userForm.controls.confirm.dirty || userForm.controls.confirm.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.confirm.errors?.required && (userForm.controls.confirm.dirty || userForm.controls.confirm.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor confirma tu contraseña</p>
             </ion-item>
-            <ion-item *ngIf="userForm.controls.confirm.errors?.MatchPassword && (userForm.controls.confirm.dirty || userForm.controls.confirm.touched || submitAttempt)" no-lines>
+            <ion-item *ngIf="userForm.controls.confirm.errors?.MatchPassword && (userForm.controls.confirm.dirty || userForm.controls.confirm.touched || submitAttempt)" no-lines text-wrap>
               <p>Las contraseñas no coinciden</p>
             </ion-item>
           </ion-list>

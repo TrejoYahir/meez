@@ -1,0 +1,35 @@
+<!--
+  Generated template for the AddServicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Añadir servicio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <form [formGroup]="userForm" (ngSubmit)="addService()">
+          <ion-list padding no-margin>
+            <ion-item no-padding>
+              <ion-label floating text-uppercase>Nombre del servicio</ion-label>
+              <ion-input type="text"  formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="(userForm.controls.name.errors?.required || userForm.controls.name.errors?.whitespace) && (userForm.controls.name.dirty || userForm.controls.name.touched || submitAttempt)" no-lines text-wrap>
+              <p>Debes ingresar un nombre de servicio</p>
+            </ion-item>
+          </ion-list>
+          <button ion-button block type="submit" margin-top>Guardar</button>  
+        </form>                
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

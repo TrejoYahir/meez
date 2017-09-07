@@ -14,7 +14,7 @@
     <ion-row>
       <ion-col col-12>
         <button *ngFor="let service of services" (click)="showPhrases(service)" ion-button block icon-left margin-vertical>
-          <ion-icon [name]="service.icon" item-start></ion-icon>
+          <ion-icon [name]="service.icon" *ngIf="service.icon"></ion-icon>
           {{service.name}}
         </button>
       </ion-col>

@@ -23,14 +23,14 @@
                 <ion-label floating text-uppercase>Correo electrónico</ion-label>
                 <ion-input type="email"  formControlName="correo"></ion-input>
               </ion-item>
-              <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines>
+              <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines text-wrap>
                 <p>Por favor ingresa un electrónico válido</p>
               </ion-item>
               <ion-item no-padding>
                 <ion-label floating text-uppercase>Contraseña</ion-label>
                 <ion-input type="password" formControlName="contra"></ion-input>
               </ion-item>
-              <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines>
+              <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines text-wrap>
                 <p>Por favor ingresa una contraseña</p>
               </ion-item>
             </ion-list>
