@@ -104,13 +104,13 @@ export class MyApp {
         {
           text: 'Cerrar sesión',
           handler: () => {
+            this.servicesProvider.setServices(services);            
             this.storage.clear();
             this.userProvider.setLoggedIn(false);
             this.userProvider.setUser(null);
             this.menuCtrl.close();    
+            this.showToast('Ha cerrado sesión');            
             this.nav.popToRoot();
-            this.servicesProvider.setServices(services);
-            this.showToast('Ha cerrado sesión');
           }
         }
       ]
