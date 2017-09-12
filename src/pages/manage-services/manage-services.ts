@@ -29,8 +29,8 @@ export class ManageServicesPage {
 
   deleteService(service) {
     let prompt = this.alertCtrl.create({
-      title: '¿Eliminar servicio ' + service.name + '?',
-      message: 'Se eliminará el servicio y todas sus frases',
+      title: '¿Está seguro que desea eliminar el servicio?',
+      message: 'Se eliminará el servicio "' + service.name + '" y todas sus frases',
       buttons: [
         {
           text: "Cancelar",
@@ -39,8 +39,11 @@ export class ManageServicesPage {
         {
           text: "Eliminar",
           handler: ()=> {                       
-            this.servicesProvider.deleteService(service.id);    
-            this.showToast("Servicio " + service.name + " eliminado correctamente.")
+            this.servicesProvider.deleteService(service.id).then(()=>{
+              this.showToast("El servicio fue eliminado");
+            }).catch(()=>{
+              this.showToast("Error interno (Conexión de BBDD)");
+            });            
           }
         }
       ]

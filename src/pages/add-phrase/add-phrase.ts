@@ -1,3 +1,4 @@
+import { Phrase } from './../../data/phrase.interface';
 import { ServicesProvider } from './../../providers/services/services';
 import { Service } from './../../data/service.interface';
 import { Storage } from '@ionic/storage';
@@ -23,14 +24,27 @@ export class AddPhrasePage {
   private userForm: FormGroup;
   private submitAttempt: boolean = false;
   private services: Service[];
+  private editMode: boolean = false;
+  private phrase: any;
+  private title: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private storage: Storage, private servicesProvider: ServicesProvider) {
     this.createForm();
+
+    this.editMode = this.navParams.get('edit') ? true : false;    
+    this.phrase = this.navParams.get('phrase');
+    this.title = this.editMode ? "Editar" : "Añadir";
+
+    if(this.editMode) {
+      this.userForm.patchValue({name: this.phrase.name, content: this.phrase.content, category: this.phrase.categoryId});
+    }
+
     this.servicesProvider.getServices()
       .asObservable()
       .subscribe(serviceList => {
         this.services = serviceList;
-      })
+      });
+    
   }
 
   private createForm() {
@@ -47,9 +61,17 @@ export class AddPhrasePage {
     return isValid ? null : { 'whitespace': true }
   }
 
+  savePhrase() {
+    if(this.editMode) {
+      this.editPhrase();
+    }
+    else {
+      this.addPhrase();
+    }
+  }
+
   addPhrase() {
     this.submitAttempt = true;
-    console.log("form", this.userForm);
     if(this.userForm.valid) {
       let loader = this.loadingCtrl.create({
         content: "Guardando frase"
@@ -68,25 +90,29 @@ export class AddPhrasePage {
     }  
   }
 
-  addSuccess(response) {    
-    let user = {
-      correo: this.userForm.value.correo,
-      nombre: this.userForm.value.nombre,
-      apellidos: this.userForm.value.apellidos
-    }
-
-    this.storage.set('loggedIn', true);
-    this.userProvider.setLoggedIn(true);
-
-    this.userProvider.setUser(user);
-    this.storage.set('user', user)
-      .then((data)=>{
-        this.userForm.reset();
-        this.navCtrl.popToRoot();
-      })
-      .catch((error)=>{
-        console.log(error);      
+  editPhrase() {
+    this.submitAttempt = true;
+    if(this.userForm.valid) {
+      let loader = this.loadingCtrl.create({
+        content: "Guardando cambios"
       });
+      loader.present();
+      let data = this.userForm.value;
+      let categoryId = this.userForm.value.category;
+      data.id = this.phrase.id;
+      delete data.category;
+      this.servicesProvider.editPhrase(this.phrase.categoryId, categoryId, data).then(data => {
+        loader.dismiss();
+        this.showToast("Frase editada exitosamente");
+        this.navCtrl.pop();
+      }).catch(error=>{
+        this.showToast("Error al guardar frase (almacenamiento insuficiente)");
+      });
+    }
+  }
+
+  addSuccess(response) {    
+
   }
 
   addError(response) {

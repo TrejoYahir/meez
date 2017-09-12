@@ -26,6 +26,8 @@ export class ServicesProvider {
   }
 
   setServices(serviceList) {
+    console.log("servicelist changed", serviceList);
+    
     this.services.next(serviceList);
   }
 
@@ -41,8 +43,8 @@ export class ServicesProvider {
 
   deleteService(id) {
     let serviceList = this.services.value.filter(x => x.id != id);
-    this.saveLocal(serviceList);    
     this.setServices(serviceList);
+    return this.saveLocal(serviceList);    
   }
 
   getLastId(){
@@ -56,6 +58,47 @@ export class ServicesProvider {
     let id = (phraseList.length > 0) ? (Math.max.apply(Math, phraseList.map((x) => {return x.id})) + 1) : 1;
     phrase.id = id;
     phraseList.push(phrase);
+    category.phrases = phraseList;
+    serviceList = serviceList.map((x) => x.id == categoryId ? category : x);
+    this.setServices(serviceList);
+    return this.saveLocal(serviceList);
+  }
+
+  editPhrase(priorId, categoryId, phrase) {   
+
+    let serviceList = this.services.value;
+    let category = serviceList.find(x => x.id == categoryId); 
+    let phraseList = category.phrases;
+
+    let priorCategory;
+    let priorList;    
+
+    if(priorId != categoryId) {
+      priorCategory = serviceList.find(x => x.id == priorId); 
+      priorList = priorCategory.phrases;
+      priorList = priorList.filter(x => x.id != phrase.id);
+      priorCategory.phrases = priorList;
+      serviceList = serviceList.map((x) => x.id == priorId ? priorCategory : x);
+
+      delete phrase.id;
+      return this.addPhrase(categoryId, phrase);
+    }    
+    else {
+      phraseList = phraseList.map((x)=>x.id == phrase.id ? phrase : x);  
+      category.phrases = phraseList;    
+      serviceList = serviceList.map((x) => x.id == categoryId ? category : x);
+      this.setServices(serviceList);
+      return this.saveLocal(serviceList);
+    }
+    
+  }
+
+  deletePhrase(categoryId, phrase) {
+    let serviceList = this.services.value;
+    let category = serviceList.find(x => x.id == categoryId); 
+    let phraseList = category.phrases;
+
+    phraseList = phraseList.filter(x => x.id != phrase.id);
     category.phrases = phraseList;
     serviceList = serviceList.map((x) => x.id == categoryId ? category : x);
     this.setServices(serviceList);

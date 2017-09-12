@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Añadir frase</ion-title>
+    <ion-title>{{title}} frase</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,17 +17,17 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <form [formGroup]="userForm" (ngSubmit)="addPhrase()">
+        <form [formGroup]="userForm" (ngSubmit)="savePhrase()">
           <ion-list padding no-margin>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Nombre</ion-label>
+              <ion-label floating>Nombre</ion-label>
               <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.name.errors?.required || userForm.controls.name.errors?.whitespace) && (userForm.controls.name.dirty || userForm.controls.name.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa el nombre de la frase</p>
             </ion-item>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Frase</ion-label>
+              <ion-label floating>Texto de la frase</ion-label>
               <ion-textarea type="text"  formControlName="content"></ion-textarea>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.content.errors?.required || userForm.controls.content.errors?.whitespace) && (userForm.controls.content.dirty || userForm.controls.content.touched || submitAttempt)" no-lines text-wrap>

@@ -27,7 +27,7 @@
               <p>Por favor ingresa tu nombre</p>
             </ion-item>
             <ion-item *ngIf="userForm.controls.nombre.errors?.pattern && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines text-wrap>
-              <p>Nombre contiene caracteres inválidos</p>
+              <p>Caracteres inválidos en nombre</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Apellidos</ion-label>
@@ -37,7 +37,7 @@
               <p>Por favor ingresa tus apellidos</p>
             </ion-item>
             <ion-item *ngIf="userForm.controls.apellidos.errors?.pattern && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines text-wrap>
-              <p>Apellidos contienen caracteres inválidos</p>
+              <p>Caracteres inválidos en apellidos</p>
             </ion-item>
             <ion-item no-padding>
               <ion-label floating text-uppercase>Correo electrónico</ion-label>

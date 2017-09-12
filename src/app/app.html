@@ -19,10 +19,13 @@
         <p>Administrar frases</p>
       </button>
       <button ion-item (click)="openPage(addService)" *ngIf="loggedIn">
-        <p>Añader servicio</p>
+        <p>Añadir servicio</p>
       </button>
       <button ion-item (click)="openPage(manageServices)" *ngIf="loggedIn">
         <p>Eliminar servicio</p>
+      </button>
+      <button ion-item (click)="saveOnline()" *ngIf="loggedIn">
+        <p>Guardar datos en linea</p>
       </button>
     </ion-list>
   </ion-content>

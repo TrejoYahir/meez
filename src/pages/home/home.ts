@@ -1,3 +1,4 @@
+import { QuickTextPage } from './../quick-text/quick-text';
 import { ServicesProvider } from './../../providers/services/services';
 import { PhraseListPage } from './../phrase-list/phrase-list';
 import { Service } from './../../data/service.interface';
@@ -21,7 +22,7 @@ export class HomePage {
   }
 
   goToQuickText() {
-    this.navCtrl.push('QuickTextPage');
+    this.navCtrl.push(QuickTextPage);
   }
 
   showPhrases(service) {

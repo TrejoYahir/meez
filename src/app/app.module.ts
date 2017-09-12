@@ -1,4 +1,7 @@
+import { QuickTextPage } from './../pages/quick-text/quick-text';
+import { ManagePhraseListPage } from './../pages/manage-phrase-list/manage-phrase-list';
 import { ManageServicesPage } from './../pages/manage-services/manage-services';
+import { ManagePhrasesPage } from './../pages/manage-phrases/manage-phrases';
 import { AddServicePage } from './../pages/add-service/add-service';
 import { AddPhrasePage } from './../pages/add-phrase/add-phrase';
 import { LoginPage } from './../pages/login/login';
@@ -31,7 +34,10 @@ import { PhrasesProvider } from '../providers/phrases/phrases';
     LoginPage,
     AddPhrasePage,
     AddServicePage,
-    ManageServicesPage
+    ManageServicesPage,
+    ManagePhrasesPage,
+    ManagePhraseListPage,
+    QuickTextPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,10 @@ import { PhrasesProvider } from '../providers/phrases/phrases';
     LoginPage,
     AddPhrasePage,
     AddServicePage,
-    ManageServicesPage
+    ManageServicesPage,
+    ManagePhrasesPage,
+    ManagePhraseListPage,
+    QuickTextPage  
   ],
   providers: [
     StatusBar,

@@ -77,7 +77,7 @@ export class RegisterPage {
           this.registerError(response);
       }, (error) => {
         loader.dismiss(); 
-        this.showToast("Ocurrió un error en el servidor, intenta más tarde");        
+        this.showToast("No hay conexión a internet");        
         console.log("error", error);        
       });
     }  

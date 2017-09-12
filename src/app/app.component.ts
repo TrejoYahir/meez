@@ -1,4 +1,5 @@
 import { ManageServicesPage } from './../pages/manage-services/manage-services';
+import { ManagePhrasesPage } from './../pages/manage-phrases/manage-phrases';
 import { ServicesProvider } from './../providers/services/services';
 import { AddPhrasePage } from './../pages/add-phrase/add-phrase';
 import { AddServicePage } from './../pages/add-service/add-service';
@@ -25,7 +26,8 @@ export class MyApp {
   loginPage:any = LoginPage;
   addService:any = AddServicePage;
   addPhrase: any = AddPhrasePage;
-  manageServices:any = ManageServicesPage
+  manageServices:any = ManageServicesPage;
+  managePhrases:any = ManagePhrasesPage;
 
   loggedIn:boolean = false;
   user: any;
@@ -98,7 +100,7 @@ export class MyApp {
             this.menuCtrl.close();    
             this.nav.popToRoot();
             this.servicesProvider.setServices(services);
-            this.showToast('Se ha cerrado la sesión');
+            this.showToast('Ha cerrado sesión');
           }
         }
       ]
@@ -112,6 +114,11 @@ export class MyApp {
       duration: 3000
     });
     toast.present();
+  }
+
+  saveOnline() {
+    //todo
+    this.menuCtrl.close();
   }
 
 }
