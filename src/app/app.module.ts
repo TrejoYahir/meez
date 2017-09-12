@@ -1,3 +1,4 @@
+import { ComplainFormPage } from './../pages/complain-form/complain-form';
 import { QuickTextPage } from './../pages/quick-text/quick-text';
 import { ManagePhraseListPage } from './../pages/manage-phrase-list/manage-phrase-list';
 import { ManageServicesPage } from './../pages/manage-services/manage-services';
@@ -37,7 +38,8 @@ import { PhrasesProvider } from '../providers/phrases/phrases';
     ManageServicesPage,
     ManagePhrasesPage,
     ManagePhraseListPage,
-    QuickTextPage
+    QuickTextPage,
+    ComplainFormPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { PhrasesProvider } from '../providers/phrases/phrases';
     ManageServicesPage,
     ManagePhrasesPage,
     ManagePhraseListPage,
-    QuickTextPage  
+    QuickTextPage,
+    ComplainFormPage
   ],
   providers: [
     StatusBar,

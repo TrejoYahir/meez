@@ -1,3 +1,5 @@
+import { Service } from './../data/service.interface';
+import { ComplainFormPage } from './../pages/complain-form/complain-form';
 import { ManageServicesPage } from './../pages/manage-services/manage-services';
 import { ManagePhrasesPage } from './../pages/manage-phrases/manage-phrases';
 import { ServicesProvider } from './../providers/services/services';
@@ -28,9 +30,11 @@ export class MyApp {
   addPhrase: any = AddPhrasePage;
   manageServices:any = ManageServicesPage;
   managePhrases:any = ManagePhrasesPage;
+  complainPage: any = ComplainFormPage;
 
   loggedIn:boolean = false;
   user: any;
+  serviceList: Service[];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private storage: Storage, private userProvider: UserProvider, private toastCtrl: ToastController, private alertCtrl: AlertController, private servicesProvider: ServicesProvider) {
     platform.ready().then(() => {
@@ -49,6 +53,12 @@ export class MyApp {
         .subscribe(user => {
           this.user = user;     
         });
+
+      servicesProvider.getServices()
+        .asObservable()
+        .subscribe(serviceList => {
+          this.serviceList = serviceList;     
+      });
         
       storage.get('loggedIn').then(status => {
         let logged = status ? true : false;
@@ -117,7 +127,16 @@ export class MyApp {
   }
 
   saveOnline() {
-    //todo
+    let data = {
+      correo: this.user.correo,
+      contenido: JSON.stringify(this.serviceList)
+    };
+    console.log(data);    
+    this.userProvider.saveOnline(data).subscribe((data)=>{
+      console.log(data);      
+    }, (error)=>{
+      console.log(error);      
+    });
     this.menuCtrl.close();
   }
 

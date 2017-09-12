@@ -45,4 +45,12 @@ export class UserProvider {
     return this.user;
   }
 
+  saveOnline(data) {
+    return this.http.post(this.url + "/sincronizar", data).map(response => response.json());
+  }
+
+  getUserData(id) {
+    return this.http.get(this.url + "/sincronizar/"  + id).map(response => response.json());
+  }
+
 }

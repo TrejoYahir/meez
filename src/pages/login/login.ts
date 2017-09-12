@@ -1,3 +1,4 @@
+import { ServicesProvider } from './../../providers/services/services';
 import { Storage } from '@ionic/storage';
 import { RegisterPage } from './../register/register';
 import { UserProvider } from './../../providers/user/user';
@@ -22,7 +23,7 @@ export class LoginPage {
   private userForm: FormGroup;
   private submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private storage: Storage, private serviceProvider: ServicesProvider) {
     this.createForm();
     console.log(this.userForm);    
   }
@@ -62,13 +63,16 @@ export class LoginPage {
 
   loginSuccess(response) {    
 
+    let loader = this.loadingCtrl.create({
+      content: "Obteniendo frases y servicios"
+    });
+    loader.present();
+
     let user = {
       nombre: response.Nombre,
       apellidos: response.Apellidos,
       correo: this.userForm.value.correo
-    }
-    
-    this.showToast("Bienvenido, " + user.nombre);    
+    }    
     
     this.storage.set('loggedIn', true);
     this.userProvider.setLoggedIn(true);
@@ -77,14 +81,33 @@ export class LoginPage {
     this.storage.set('user', user)
       .then((data)=>{
         this.userForm.reset();
-        this.navCtrl.popToRoot();
       })
       .catch((error)=>{
         console.log(error);      
       });
+
+    this.userProvider.getUserData(user.correo).subscribe((data)=>{
+      if(data.Success == null) {
+        let serviceList = JSON.parse(data.replace(/\'/g,"\""));
+        this.serviceProvider.saveLocal(serviceList);
+        this.serviceProvider.setServices(serviceList);       
+      }      
+      this.navCtrl.popToRoot();     
+      loader.dismiss();
+      this.showToast("Bienvenido, " + user.nombre);   
+    }, (error)=>{
+      this.navCtrl.popToRoot();      
+      loader.dismiss();      
+      this.showToast("Error al obtener datos");
+    });
+
   }
 
   loginError(response) {
+    
+  }
+
+  getUserData(id) {
     
   }
 
