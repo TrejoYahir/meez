@@ -53,4 +53,8 @@ export class UserProvider {
     return this.http.get(this.url + "/sincronizar/"  + id).map(response => response.json());
   }
 
+  sendComplain(data) {
+    return this.http.post(this.url + "/queja", data).map(response => response.json());    
+  }
+
 }

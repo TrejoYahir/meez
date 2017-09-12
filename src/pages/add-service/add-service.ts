@@ -65,31 +65,6 @@ export class AddServicePage {
     }  
   }
 
-  addSuccess(response) {    
-    let user = {
-      correo: this.userForm.value.correo,
-      nombre: this.userForm.value.nombre,
-      apellidos: this.userForm.value.apellidos
-    }
-
-    this.storage.set('loggedIn', true);
-    this.userProvider.setLoggedIn(true);
-
-    this.userProvider.setUser(user);
-    this.storage.set('user', user)
-      .then((data)=>{
-        this.userForm.reset();
-        this.navCtrl.popToRoot();
-      })
-      .catch((error)=>{
-        console.log(error);      
-      });
-  }
-
-  addError(response) {
-    
-  }
-
   showToast(message: string) {
     let toast = this.toastCtrl.create({
       message: message,

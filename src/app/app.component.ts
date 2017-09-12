@@ -134,8 +134,10 @@ export class MyApp {
     console.log(data);    
     this.userProvider.saveOnline(data).subscribe((data)=>{
       console.log(data);      
+      this.showToast("Tus frases y servicios se han guardado en linea");
     }, (error)=>{
       console.log(error);      
+      this.showToast("No hay conexión a internet");
     });
     this.menuCtrl.close();
   }

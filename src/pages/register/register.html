@@ -20,7 +20,7 @@
         <form [formGroup]="userForm" (ngSubmit)="register()">
           <ion-list padding no-margin>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Nombre</ion-label>
+              <ion-label floating>Nombre</ion-label>
               <ion-input type="text"  formControlName="nombre"></ion-input>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.nombre.errors?.required || userForm.controls.nombre.errors?.whitespace) && (userForm.controls.nombre.dirty || userForm.controls.nombre.touched || submitAttempt)" no-lines text-wrap>
@@ -30,7 +30,7 @@
               <p>Caracteres inválidos en nombre</p>
             </ion-item>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Apellidos</ion-label>
+              <ion-label floating>Apellidos</ion-label>
               <ion-input type="text"  formControlName="apellidos"></ion-input>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.apellidos.errors?.required || userForm.controls.apellidos.errors?.whitespace) && (userForm.controls.apellidos.dirty || userForm.controls.apellidos.touched || submitAttempt)" no-lines text-wrap>
@@ -40,14 +40,14 @@
               <p>Caracteres inválidos en apellidos</p>
             </ion-item>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Correo electrónico</ion-label>
+              <ion-label floating>Correo electrónico</ion-label>
               <ion-input type="email"  formControlName="correo"></ion-input>
             </ion-item>
             <ion-item *ngIf="(userForm.controls.correo.errors?.required || userForm.controls.correo.errors?.email) && (userForm.controls.correo.dirty || userForm.controls.correo.touched || submitAttempt)" no-lines text-wrap>
               <p>Por favor ingresa un electrónico válido</p>
             </ion-item>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Contraseña</ion-label>
+              <ion-label floating>Contraseña</ion-label>
               <ion-input type="password" formControlName="contra"></ion-input>
             </ion-item>
             <ion-item *ngIf="userForm.controls.contra.errors?.required && (userForm.controls.contra.dirty || userForm.controls.contra.touched || submitAttempt)" no-lines text-wrap>
@@ -59,7 +59,7 @@
               </p>
             </ion-item>
             <ion-item no-padding>
-              <ion-label floating text-uppercase>Confirmar contraseña</ion-label>
+              <ion-label floating>Confirmar contraseña</ion-label>
               <ion-input type="password" formControlName="confirm"></ion-input>
             </ion-item>
             <ion-item *ngIf="userForm.controls.confirm.errors?.required && (userForm.controls.confirm.dirty || userForm.controls.confirm.touched || submitAttempt)" no-lines text-wrap>
