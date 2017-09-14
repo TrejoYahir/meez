@@ -23,7 +23,7 @@
             <ion-item *ngFor="let phrase of service.phrases">
               {{phrase.name}}
               <ion-icon name="create" item-right color="secondary" *ngIf="editMode" (click)="editPhrase(phrase, service.id)"></ion-icon>
-              <ion-icon name="trash" item-right color="danger" *ngIf="deleteMode" (click)="deletePhrase(phrase, service.id)"></ion-icon>
+              <ion-icon name="trash" item-right color="danger" *ngIf="deleteMode && !phrase.default" (click)="deletePhrase(phrase, service.id)"></ion-icon>
             </ion-item>
           </ion-item-group>
         </ion-list>

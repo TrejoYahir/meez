@@ -1,3 +1,4 @@
+import { QuickTextPage } from './../quick-text/quick-text';
 import { TextViewPage } from './../text-view/text-view';
 import { Phrase } from './../../data/phrase.interface';
 import { Component } from '@angular/core';
@@ -27,7 +28,7 @@ export class PhraseListPage {
   }
 
   goToQuickText() {
-    this.navCtrl.push('QuickTextPage');
+    this.navCtrl.push(QuickTextPage);
   }
 
   showText(phrase) {
@@ -35,5 +36,6 @@ export class PhraseListPage {
       'text': phrase.content
     }); 
   }
+  
 
 }

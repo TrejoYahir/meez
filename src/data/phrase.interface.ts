@@ -1,5 +1,6 @@
 export interface Phrase {
     name: string,
     id: number,
-    content: string
+    content: string,
+    default?: boolean
 }

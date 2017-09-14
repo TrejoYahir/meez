@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from './../pages/register/register';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController, ToastController, AlertController } from 'ionic-angular';
+import { Platform, NavController, MenuController, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import services from '../data/services';
@@ -36,7 +36,7 @@ export class MyApp {
   user: any;
   serviceList: Service[];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private storage: Storage, private userProvider: UserProvider, private toastCtrl: ToastController, private alertCtrl: AlertController, private servicesProvider: ServicesProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuCtrl: MenuController, private storage: Storage, private userProvider: UserProvider, private toastCtrl: ToastController, private alertCtrl: AlertController, private servicesProvider: ServicesProvider, private loadingCtrl: LoadingController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -127,6 +127,10 @@ export class MyApp {
   }
 
   saveOnline() {
+    let loader = this.loadingCtrl.create({
+      content: "Guardando en linea"
+    });
+    loader.present();
     let data = {
       correo: this.user.correo,
       contenido: JSON.stringify(this.serviceList)
@@ -134,9 +138,11 @@ export class MyApp {
     console.log(data);    
     this.userProvider.saveOnline(data).subscribe((data)=>{
       console.log(data);      
+      loader.dismiss();      
       this.showToast("Tus frases y servicios se han guardado en linea");
     }, (error)=>{
       console.log(error);      
+      loader.dismiss();      
       this.showToast("No hay conexión a internet");
     });
     this.menuCtrl.close();
